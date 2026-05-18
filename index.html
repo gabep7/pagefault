@@ -3,9 +3,73 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>pagefault</title>
+  <title>pagefault — page replacement visualiser</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app"></div>
+  <header>
+    <h1>pagefault</h1>
+    <p>page replacement algorithm visualiser</p>
+  </header>
+
+  <main>
+    <section id="controls">
+      <div class="control-group">
+        <label for="refstring">reference string</label>
+        <input type="text" id="refstring" value="1 2 3 4 1 2 5 1 2 3 4 5"
+          placeholder="space-separated page numbers">
+      </div>
+
+      <div class="control-group">
+        <label for="frames">frames</label>
+        <input type="number" id="frames" value="3" min="1" max="10">
+      </div>
+
+      <div class="control-group">
+        <label for="algo">algorithm</label>
+        <select id="algo">
+          <option value="fifo">fifo</option>
+          <option value="lru">lru</option>
+          <option value="optimal">optimal</option>
+          <option value="clock">clock</option>
+        </select>
+      </div>
+
+      <div class="control-group buttons">
+        <button id="step-btn">step</button>
+        <button id="run-btn">run</button>
+        <button id="reset-btn">reset</button>
+      </div>
+
+      <div class="control-group">
+        <label for="speed">speed (ms)</label>
+        <input type="range" id="speed" value="500" min="100" max="2000" step="100">
+        <span id="speed-val">500</span>
+      </div>
+    </section>
+
+    <section id="stats">
+      <span id="step-counter">step 0 / 0</span>
+      <span id="fault-counter">faults: 0</span>
+      <span id="hit-counter">hits: 0</span>
+    </section>
+
+    <section id="viz">
+      <table id="frame-table">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="legend">
+      <span class="legend-item fault">page fault</span>
+      <span class="legend-item hit">page hit</span>
+      <span class="legend-item evict">evicted</span>
+    </section>
+  </main>
+
+  <script src="js/algorithms.js"></script>
+  <script src="js/visualiser.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
